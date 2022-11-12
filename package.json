@@ -1,0 +1,21 @@
+{
+  "name": "03-homework-ts",
+  "version": "1.0.0",
+  "description": "TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"tsc -w\" \"lite-server\""
+  },
+  "author": "Angel Stoyanov",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "lite-server": "^2.6.1",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0"
+  }
+}
