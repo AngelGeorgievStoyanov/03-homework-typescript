@@ -7,21 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getAllBoks } from './services/bookServices.js';
-import { home } from './home.js';
-const query = document.getElementById('search');
-const btnSearch = document.getElementById('searchFunc');
-const div = document.getElementById('result');
-btnSearch.addEventListener('click', function (e) { if (query.value.trim() != '') {
-    init(query.value.trim(), e);
-} });
-let arr = [];
-function init(data, e) {
+const apiJson = 'http://localhost:3000';
+export function getAllFavorites() {
     return __awaiter(this, void 0, void 0, function* () {
-        e.preventDefault();
-        const books = yield getAllBoks(data);
-        arr.push(Array.from(books.items));
-        home(arr[0], div);
+        const data = yield fetch(`${apiJson}/posts`);
+        return data.json();
     });
 }
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=jsonSevice.js.map
