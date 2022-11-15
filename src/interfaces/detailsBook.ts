@@ -4,7 +4,7 @@ export interface Images {
 }
 
 export interface Items extends Images{
-    authors?:[]|string;
+    authors?:[];
     description?:string;
     publishedDate?:string;
     imageLinks?:{
@@ -12,6 +12,8 @@ export interface Items extends Images{
     };
     title:string;
     toString():string;
+    join(arg: string): string;
+    split(arg0: string): [];
 }
 
 export interface BookDetails extends Items {

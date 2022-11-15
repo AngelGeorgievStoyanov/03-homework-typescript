@@ -9,11 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { clearDiv } from "./clearDiv.js";
 import { detailsPage } from "./detailsBook.js";
+import { home } from "./home.js";
+import { allMyFavorites } from "./myFavPage.js";
 import { getBookById } from "./services/bookServices.js";
 const div = document.getElementById('result');
 const divCildren = div.childNodes;
-export function targetButton(e) {
-    var _a;
+export function targetButton(e, arrLastSearch) {
+    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
         const classTarget = e.target.className;
         const id = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.id;
@@ -24,6 +26,18 @@ export function targetButton(e) {
             const book = yield getBookById(id);
             console.log(book, '-------');
             detailsPage(book, div);
+        }
+        else if (classTarget == 'btnBackToHome') {
+            clearDiv(divCildren);
+            home(arrLastSearch, div);
+        }
+        else if (classTarget == 'btnBackToFav') {
+            clearDiv(divCildren);
+            allMyFavorites(e);
+        }
+        else if (classTarget == 'btnCmnt') {
+            const form = (_c = (_b = e.target.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.childNodes[6].childNodes[0];
+            form.style.display = '';
         }
     });
 }

@@ -11,8 +11,8 @@ import { getAllBoks } from './services/bookServices.js';
 import { home } from './home.js';
 import { clearDiv } from './clearDiv.js';
 import { getAllFavorites } from './services/jsonSevice.js';
-import { favorites } from './myFavorites.js';
 import { targetButton } from './eventTarget.js';
+import { allMyFavorites } from './myFavPage.js';
 const query = document.getElementById('search');
 const btnSearch = document.getElementById('searchFunc');
 const btnMyFav = document.getElementById('myFav');
@@ -48,27 +48,13 @@ function init(data, e) {
 function myFavorites(e) {
     return __awaiter(this, void 0, void 0, function* () {
         e.preventDefault();
-        const booksFav = yield getAllFavorites();
-        if (divCildren.length > 0 && divCildren != undefined) {
-            clearDiv(divCildren);
-        }
-        const arr = booksFav.map((e) => __awaiter(this, void 0, void 0, function* () {
-            const book = yield favorites(e.id);
-            if (typeof book == 'object') {
-                return book;
-            }
-        }));
-        const arrf = yield Promise.all(arr).then((values) => {
-            return values;
-        });
-        console.log(arrf);
-        home(arrf, div);
+        allMyFavorites(e);
     });
 }
 function checkEventTarget(e) {
     return __awaiter(this, void 0, void 0, function* () {
         e.preventDefault();
-        targetButton(e);
+        targetButton(e, arr);
     });
 }
 //# sourceMappingURL=index.js.map

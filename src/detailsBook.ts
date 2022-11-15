@@ -1,5 +1,6 @@
 // import { Book } from "./interfaces/book.js"
 import { elem } from './createElement.js'
+import { addCommentForm } from './formComments.js';
 import { Book } from './interfaces/book.js';
 import { BookDetails } from "./interfaces/detailsBook.js";
 import { getAllFavorites } from './services/jsonSevice.js';
@@ -23,27 +24,28 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
     h1.textContent = 'Title  of the Book  --- ' + bookObj.volumeInfo.title;
 
     const h2 = elem('h2', 'false', 'false', 0, 0, 'false', 'false');
-    const arrAuthors = new Array(bookObj.volumeInfo.authors)
-    h2.textContent = arrAuthors != undefined ? 'Authors of the Book  ---  ' + arrAuthors.join('  and  ') : 'There is no author for this book in DB';
+    const arrAuthors =new Array(bookObj.volumeInfo.authors)
+    
+    h2.textContent = arrAuthors != undefined ? 'Authors of the Book  ---  ' + arrAuthors[0].join('  and  ') : 'There is no author for this book in DB';
 
     const h3 = elem('h3', 'false', 'false', 0, 0, 'false', 'false');
     const date = bookObj.volumeInfo.publishedDate;
 
 
-    h3.textContent = date != undefined ? 'Published date  ---  ' + date : 'No info for published date';
+    h3.textContent = date != undefined ? 'Published date  ---  ' + date.split('-').reverse().join('/') : 'No info for published date';
 
     const p = elem('p', 'false', 'false', 0, 0, 'false', 'false');
-     p.innerHTML = bookObj.volumeInfo.description != undefined ? 'Description  ' + bookObj.volumeInfo.description : 'There is no description for this book in DB';
+    p.innerHTML = bookObj.volumeInfo.description != undefined ? 'Description  ' + bookObj.volumeInfo.description : 'There is no description for this book in DB';
 
-     const src = bookObj.volumeInfo.imageLinks.thumbnail;
+    const src = bookObj.volumeInfo.imageLinks.thumbnail;
     const img = elem('img', 'false', 'false', 0, 0, src!, 'false');
-    const section = elem('section', 'sectionButtons','false', 0, 0, 'false', 'false')
+    const section = elem('section', 'sectionButtons', 'false', 0, 0, 'false', 'false')
     const btnBackHome = elem('button', 'btnBackToHome', 'BACK TO HOME', 0, 0, 'false', 'false');
     const btnBackFav = elem('button', 'btnBackToFav', 'BACK TO FAVORITES', 0, 0, 'false', 'false');
     const btnComment = elem('button', 'btnCmnt', 'Add coment', 0, 0, 'false', 'false')
 
     const hasFav = await getAllFavorites();
-    const hasFavorit = hasFav.filter((x:Book) => x.id == idBook);
+    const hasFavorit = hasFav.filter((x: Book) => x.id == idBook);
 
     article.appendChild(h1);
     article.appendChild(h2);
@@ -64,7 +66,25 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
 
     article.appendChild(section);
 
+    const divForm = elem('div', 'div-form','false',0,0,'false','false')
 
+
+
+    const form = await addCommentForm()
+
+    divForm.append(form)
+    article.appendChild(divForm);
+
+    // if (cmts != undefined && cmts.length > 0) {
+
+
+    //     cmts.forEach(comment => {
+    //         let annotation = card(comment)
+
+    //         article.append(annotation)
+    //     });
+
+    // }
 
     div.appendChild(article);
 }

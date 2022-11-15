@@ -2,10 +2,10 @@ import { getAllBoks } from './services/bookServices.js';
 import { home } from './home.js';
 import { clearDiv } from './clearDiv.js'
 import { getAllFavorites } from './services/jsonSevice.js';
-import { favorites } from './myFavorites.js';
-import { Book } from './interfaces/book.js';
-import {targetButton} from './eventTarget.js'
-import { BookDetails } from './interfaces/detailsBook.js';
+import { targetButton } from './eventTarget.js'
+import { allMyFavorites } from './myFavPage.js';
+
+
 const query = (<HTMLInputElement>document.getElementById('search'));
 const btnSearch = (<HTMLButtonElement>document.getElementById('searchFunc'));
 const btnMyFav = <HTMLButtonElement>document.getElementById('myFav')
@@ -14,7 +14,7 @@ btnMyFav.addEventListener('click', function (e: Event) { myFavorites(e) });
 
 
 const div = <HTMLElement>document.getElementById('result');
-div.addEventListener('click', function(e:Event) {checkEventTarget(e)});
+div.addEventListener('click', function (e: Event) { checkEventTarget(e) });
 
 const divCildren = div.childNodes;
 
@@ -55,45 +55,14 @@ async function init(data: string, e: Event) {
 }
 
 
-async function myFavorites(e: Event) {
-    e.preventDefault();
-
-    const booksFav: Book[] = await getAllFavorites();
-
-   
-
-    if (divCildren.length > 0 && divCildren != undefined) {
-        clearDiv(divCildren);
-    }
-
-
-    const arr = booksFav.map(async (e) => {
-        const book: string = await favorites(e.id);
-        if (typeof book == 'object') {
-            return book
-
-        }
-
-
-    });
-
-    const arrf:BookDetails|any = await Promise.all(arr).then((values) => {
-        return values;
-    });
-
-    console.log(arrf)
-
-
-   
-        home(arrf, div);
-  
-
-
+async function myFavorites (e:Event) {
+    e.preventDefault()
+    allMyFavorites(e)
 }
 
 
-async function checkEventTarget(e:Event){
+async function checkEventTarget(e: Event) {
     e.preventDefault()
 
-    targetButton(e)
+    targetButton(e,arr)
 }
