@@ -1,22 +1,22 @@
-export function elem(a, b, c, d, e, f, z) {
+export function elem(a, className, textContent, width, height, src, id) {
     const element = document.createElement(a);
-    if (b !== 'false') {
-        element.className = b;
+    if (className !== 'false') {
+        element.className = className;
     }
-    if (c !== 'false') {
-        element.textContent = c;
+    if (textContent !== 'false') {
+        element.textContent = textContent;
     }
-    if (d > 0) {
-        element.width = d;
+    if (width > 0) {
+        element.width = width;
     }
-    if (e > 0) {
-        element.height = e;
+    if (height > 0) {
+        element.height = height;
     }
-    if (f !== 'false') {
-        element.src = f;
+    if (src !== 'false') {
+        element.src = src;
     }
-    if (z !== 'false') {
-        element.id = z;
+    if (id !== 'false') {
+        element.id = id;
     }
     return element;
 }

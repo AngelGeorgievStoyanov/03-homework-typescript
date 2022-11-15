@@ -7,18 +7,18 @@ export async function home(arrBook:[], div:HTMLElement) {
 
     const idBooki:[] = await getAllFavorites();
 
-    console.log(idBooki)
+  
 
-    // if (idBooki.length > 1) {
-    //     const btnMyFav = document.getElementById('myFav');
-    //     btnMyFav.style.display = 'block';
+    if (idBooki.length > 1) {
+        const btnMyFav = <HTMLElement>document.getElementById('myFav');
+        btnMyFav.style.display = 'block';
 
-    // }
+    }
   
     query.value = '';
     arrBook.forEach(e => {
 
-        //console.log(e)
+     
         const idBook = e['id'];
 
        const hasFavorit:boolean = idBooki.some((x) => x['id'] == idBook);

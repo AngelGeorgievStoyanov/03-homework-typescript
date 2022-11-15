@@ -11,7 +11,8 @@ const apiJson = 'http://localhost:3000';
 export function getAllFavorites() {
     return __awaiter(this, void 0, void 0, function* () {
         const data = yield fetch(`${apiJson}/posts`);
-        return data.json();
+        const res = yield data.json();
+        return res;
     });
 }
 //# sourceMappingURL=jsonSevice.js.map

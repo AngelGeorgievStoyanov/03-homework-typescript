@@ -1,0 +1,1 @@
+{"version":3,"file":"clearDiv.js","sourceRoot":"","sources":["../src/clearDiv.ts"],"names":[],"mappings":"AAEA,MAAM,UAAU,QAAQ,CAAC,CAAuB;IAC5C,MAAM,OAAO,GAAG,KAAK,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC;IAC9B,KAAK,MAAM,EAAE,IAAI,OAAO,EAAE;QACtB,EAAE,CAAC,MAAM,EAAE,CAAC;KACf;AACL,CAAC"}

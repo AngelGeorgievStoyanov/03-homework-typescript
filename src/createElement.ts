@@ -1,23 +1,23 @@
 
-export function elem(a: string, b: string, c: string, d: number, e: number, f: string, z: string) {
+export function elem(a: string, className: string, textContent: string, width: number, height: number, src: string, id: string) {
     const element = <HTMLElement>document.createElement(a);
-    if (b !=='false') {
-        element.className = b;
+    if (className !=='false') {
+        element.className = className;
     }
-    if (c!=='false') {
-        element.textContent = c;
+    if (textContent!=='false') {
+        element.textContent = textContent;
     }
-    if (d>0) {
-        (<HTMLImageElement>element).width = d;
+    if (width>0) {
+        (<HTMLImageElement>element).width = width;
     }
-    if (e>0) {
-        (<HTMLImageElement>element).height = e;
+    if (height>0) {
+        (<HTMLImageElement>element).height = height;
     }
-    if (f!=='false') {
-        (<HTMLImageElement>element).src = f;
+    if (src!=='false') {
+        (<HTMLImageElement>element).src = src;
     }
-    if (z!=='false') {
-        element.id = z;
+    if (id!=='false') {
+        element.id = id;
     }
 
     return element;

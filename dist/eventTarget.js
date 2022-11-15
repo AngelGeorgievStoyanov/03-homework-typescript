@@ -7,22 +7,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const URL_API_BOOKS = 'https://www.googleapis.com/books/v1/volumes?q=';
-const max = '&maxResults=40';
-const urlBook = 'https://www.googleapis.com/books/v1/volumes/';
-export function getAllBoks(query) {
+import { clearDiv } from "./clearDiv.js";
+import { detailsPage } from "./detailsBook.js";
+import { getBookById } from "./services/bookServices.js";
+const div = document.getElementById('result');
+const divCildren = div.childNodes;
+export function targetButton(e) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const currentUrl = URL_API_BOOKS + query + max;
-        const data = yield fetch(currentUrl);
-        const res = yield data.json();
-        const books = res.items;
-        return books;
+        const classTarget = e.target.className;
+        const id = (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.id;
+        if (classTarget == 'btnDtls') {
+            if (divCildren.length > 0) {
+                clearDiv(divCildren);
+            }
+            const book = yield getBookById(id);
+            console.log(book, '-------');
+            detailsPage(book, div);
+        }
     });
 }
-export function getBookById(id) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const book = yield fetch(urlBook + id);
-        return book.json();
-    });
-}
-//# sourceMappingURL=bookServices.js.map
+//# sourceMappingURL=eventTarget.js.map

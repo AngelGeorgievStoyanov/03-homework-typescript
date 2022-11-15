@@ -13,7 +13,10 @@ const query = document.getElementById('search');
 export function home(arrBook, div) {
     return __awaiter(this, void 0, void 0, function* () {
         const idBooki = yield getAllFavorites();
-        console.log(idBooki);
+        if (idBooki.length > 1) {
+            const btnMyFav = document.getElementById('myFav');
+            btnMyFav.style.display = 'block';
+        }
         query.value = '';
         arrBook.forEach(e => {
             const idBook = e['id'];
