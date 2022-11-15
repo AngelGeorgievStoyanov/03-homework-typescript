@@ -14,7 +14,7 @@ export async function addCommentForm() {
     txtArea.setAttribute('rows', '8');
     txtArea.setAttribute('cols','40');
     txtArea.setAttribute('maxlength', '256')
-    const btnForm = elem('button','btnComent','Create comment',0,0,'false','false');
+    const btnForm = elem('button','btnAddComment','Create comment',0,0,'false','false');
     form.append(h3);
     form.append(inpTitle);
     form.append(h3desc);

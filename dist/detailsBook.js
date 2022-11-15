@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { elem } from './createElement.js';
 import { addCommentForm } from './formComments.js';
-import { getAllFavorites } from './services/jsonSevice.js';
+import { getAllCommentByBookId, getAllFavorites } from './services/jsonSevice.js';
+import { card } from './cardComment.js';
 export function detailsPage(bookObj, div) {
     return __awaiter(this, void 0, void 0, function* () {
         const idBook = bookObj.id;
@@ -49,6 +50,13 @@ export function detailsPage(bookObj, div) {
         const form = yield addCommentForm();
         divForm.append(form);
         article.appendChild(divForm);
+        const comments = yield getAllCommentByBookId(idBook);
+        if (comments != undefined && comments.length > 0) {
+            comments.map(comment => {
+                const annotation = card(comment);
+                article.append(annotation);
+            });
+        }
         div.appendChild(article);
     });
 }

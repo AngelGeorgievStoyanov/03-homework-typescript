@@ -3,11 +3,12 @@ import { elem } from './createElement.js'
 import { addCommentForm } from './formComments.js';
 import { Book } from './interfaces/book.js';
 import { BookDetails } from "./interfaces/detailsBook.js";
-import { getAllFavorites } from './services/jsonSevice.js';
+import { getAllCommentByBookId, getAllFavorites } from './services/jsonSevice.js';
 // import { getAllFavorites } from '../services/jsonService.js';
 // import { addCommentForm } from './addComments.js';
-// import { card } from './commentCard.js';
 
+import { Comment } from './interfaces/comment.js';
+import { card } from './cardComment.js';
 
 
 export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
@@ -24,8 +25,8 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
     h1.textContent = 'Title  of the Book  --- ' + bookObj.volumeInfo.title;
 
     const h2 = elem('h2', 'false', 'false', 0, 0, 'false', 'false');
-    const arrAuthors =new Array(bookObj.volumeInfo.authors)
-    
+    const arrAuthors = new Array(bookObj.volumeInfo.authors)
+
     h2.textContent = arrAuthors != undefined ? 'Authors of the Book  ---  ' + arrAuthors[0].join('  and  ') : 'There is no author for this book in DB';
 
     const h3 = elem('h3', 'false', 'false', 0, 0, 'false', 'false');
@@ -66,7 +67,7 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
 
     article.appendChild(section);
 
-    const divForm = elem('div', 'div-form','false',0,0,'false','false')
+    const divForm = elem('div', 'div-form', 'false', 0, 0, 'false', 'false')
 
 
 
@@ -75,16 +76,19 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
     divForm.append(form)
     article.appendChild(divForm);
 
-    // if (cmts != undefined && cmts.length > 0) {
+    const comments:Comment[] = await getAllCommentByBookId(idBook)
 
 
-    //     cmts.forEach(comment => {
-    //         let annotation = card(comment)
+    if (comments != undefined && comments.length > 0) {
 
-    //         article.append(annotation)
-    //     });
 
-    // }
+        comments.map(comment => {
+            const annotation = card(comment)
+
+            article.append(annotation)
+        });
+
+    }
 
     div.appendChild(article);
 }

@@ -4,13 +4,13 @@ export interface Images {
 }
 
 export interface Items extends Images{
-    authors?:[];
+    authors?:string|[];
     description?:string;
     publishedDate?:string;
     imageLinks?:{
         [key: string]: Images
     };
-    title:string;
+    title?:string;
     toString():string;
     join(arg: string): string;
     split(arg0: string): [];

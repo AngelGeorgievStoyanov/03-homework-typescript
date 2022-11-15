@@ -8,7 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { clearDiv } from "./clearDiv.js";
-import { favorites } from "./getBookFav.js";
+import { elem } from "./createElement.js";
+import { favorites } from "./myFavorites.js";
 import { home } from "./home.js";
 import { getAllFavorites } from "./services/jsonSevice.js";
 const div = document.getElementById('result');
@@ -20,17 +21,22 @@ export function allMyFavorites(e) {
         if (divCildren.length > 0 && divCildren != undefined) {
             clearDiv(divCildren);
         }
+        const divFav = elem('div', 'divFav', 'false', 0, 0, 'false', 'false');
+        if (booksFav.length == 0) {
+            const h1 = elem('h1', 'false', 'No books in favorites!', 0, 0, 'false', 'false');
+            div.appendChild(h1);
+        }
+        else {
+            div.appendChild(divFav);
+        }
         const arr = booksFav.map((x) => __awaiter(this, void 0, void 0, function* () {
             const book = yield favorites(x.id);
-            if (typeof book == 'object') {
-                return book;
-            }
+            return book;
         }));
         const arrf = yield Promise.all(arr).then((values) => {
             return values;
         });
-        console.log(arrf);
-        home(arrf, div);
+        home(arrf, divFav);
     });
 }
 //# sourceMappingURL=myFavPage.js.map
