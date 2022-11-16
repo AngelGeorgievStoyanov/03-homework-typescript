@@ -39,7 +39,7 @@ export function detailsPage(bookObj, div) {
         article.appendChild(img);
         article.appendChild(p);
         section.appendChild(btnBackHome);
-        if (hasFav.length > 1) {
+        if (hasFav.length > 0) {
             section.appendChild(btnBackFav);
         }
         if (hasFavorit.length > 0) {

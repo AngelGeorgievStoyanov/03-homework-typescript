@@ -12,27 +12,28 @@ const divCildren = div.childNodes;
 
 export async function allMyFavorites(e: Event) {
     e.preventDefault();
-    
+
     const booksFav: Book[] = await getAllFavorites();
-    
-    
-    
-    
+
+
+
     if (divCildren.length > 0 && divCildren != undefined) {
         clearDiv(divCildren);
     }
-    const divFav = <HTMLElement>elem('div', 'divFav', 'false', 0, 0, 'false', 'false')
+    const divFav = <HTMLElement>elem('div', 'divFav', 'false', 0, 0, 'false', 'false');
 
     if (booksFav.length == 0) {
-        const h1 = <HTMLElement>elem('h1', 'false', 'No books in favorites!', 0, 0, 'false', 'false')
+        const h1 = <HTMLElement>elem('h1', 'false', 'No books in favorites!', 0, 0, 'false', 'false');
 
-        div.appendChild(h1)
+        div.appendChild(h1);
+
     } else {
-        div.appendChild(divFav)
+        div.appendChild(divFav);
+        
     }
     const arr = booksFav.map(async (x) => {
         const book: string = await favorites(x.id);
-        return book
+        return book;
     });
 
     const arrf: BookDetails | any = await Promise.all(arr).then((values) => {
@@ -40,10 +41,7 @@ export async function allMyFavorites(e: Event) {
     });
 
 
-
-
     home(arrf, divFav);
-
 
 
 }

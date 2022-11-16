@@ -1,38 +1,27 @@
-// import { Book } from "./interfaces/book.js"
 import { elem } from './createElement.js'
 import { addCommentForm } from './formComments.js';
 import { Book } from './interfaces/book.js';
 import { BookDetails } from "./interfaces/detailsBook.js";
 import { getAllCommentByBookId, getAllFavorites } from './services/jsonSevice.js';
-// import { getAllFavorites } from '../services/jsonService.js';
-// import { addCommentForm } from './addComments.js';
-
 import { Comment } from './interfaces/comment.js';
 import { card } from './cardComment.js';
 
 
 export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
 
-
-    const idBook = bookObj.id
-
-
-
+    const idBook = bookObj.id;
 
     const article = elem('article', 'false', 'false', 0, 0, 'false', idBook);
 
     const h1 = elem('h1', 'false', 'false', 0, 0, 'false', 'false');
     h1.textContent = 'Title  of the Book  --- ' + bookObj.volumeInfo.title;
 
-    const h2 = elem('h2', 'false', 'false', 0, 0, 'false', 'false');
-    const arrAuthors = new Array(bookObj.volumeInfo.authors)
-
+    const h2 = elem('h2', 'false', 'false', 0, 0, 'false', 'false');    
+    const arrAuthors = new Array(bookObj.volumeInfo.authors);
     h2.textContent = arrAuthors != undefined ? 'Authors of the Book  ---  ' + arrAuthors[0].join('  and  ') : 'There is no author for this book in DB';
 
     const h3 = elem('h3', 'false', 'false', 0, 0, 'false', 'false');
     const date = bookObj.volumeInfo.publishedDate;
-
-
     h3.textContent = date != undefined ? 'Published date  ---  ' + date.split('-').reverse().join('/') : 'No info for published date';
 
     const p = elem('p', 'false', 'false', 0, 0, 'false', 'false');
@@ -46,6 +35,7 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
     const btnComment = elem('button', 'btnCmnt', 'Add coment', 0, 0, 'false', 'false')
 
     const hasFav = await getAllFavorites();
+
     const hasFavorit = hasFav.filter((x: Book) => x.id == idBook);
 
     article.appendChild(h1);
@@ -55,13 +45,14 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
     article.appendChild(p);
     section.appendChild(btnBackHome);
 
-    if (hasFav.length > 1) {
+    if (hasFav.length > 0) {
 
         section.appendChild(btnBackFav);
     }
 
     if (hasFavorit.length > 0) {
-        section.appendChild(btnComment)
+
+        section.appendChild(btnComment);
     }
 
 
@@ -69,23 +60,23 @@ export async function detailsPage(bookObj: BookDetails, div: HTMLElement) {
 
     const divForm = elem('div', 'div-form', 'false', 0, 0, 'false', 'false')
 
-
-
-    const form = await addCommentForm()
+    const form = await addCommentForm();
 
     divForm.append(form)
+
     article.appendChild(divForm);
 
-    const comments:Comment[] = await getAllCommentByBookId(idBook)
+    const comments: Comment[] = await getAllCommentByBookId(idBook);
 
 
     if (comments != undefined && comments.length > 0) {
 
 
         comments.map(comment => {
-            const annotation = card(comment)
 
-            article.append(annotation)
+            const annotation = card(comment);
+
+            article.append(annotation);
         });
 
     }

@@ -38,6 +38,7 @@ export async function deleteFavoritesId(id: string) {
     return response;
 }
 
+
 export async function createComments(id: string, title: string, description: string, timeCreated: string, timeEdited: boolean | string, bookId: string) {
     const response = await fetch(`${apiJson}/comments`, {
         method: 'POST',
@@ -60,6 +61,7 @@ export async function getAllCommentByBookId(bookId: string) {
     return res
 }
 
+
 export async function deleteAllCommentsByBookId(bookId: string) {
 
     const response = await fetch(`${apiJson}/comments?bookId=${bookId}`);
@@ -80,3 +82,25 @@ export async function deleteCommentById(id:string) {
 }
 
 
+
+export async function getCommentById(id: string) {
+    const data = await fetch(`${apiJson}/comments/${id}`);
+    const res = await data.json();
+
+    return res
+}
+
+
+
+export async function editCommentById(id: string,body:Comment) {
+    const response = await fetch(`${apiJson}/comments/${id}`, {
+        method: 'PUT',
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+    const result = await response.json();
+    return result;
+
+}

@@ -71,4 +71,24 @@ export function deleteCommentById(id) {
         return response;
     });
 }
+export function getCommentById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const data = yield fetch(`${apiJson}/comments/${id}`);
+        const res = yield data.json();
+        return res;
+    });
+}
+export function editCommentById(id, body) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(`${apiJson}/comments/${id}`, {
+            method: 'PUT',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
+        const result = yield response.json();
+        return result;
+    });
+}
 //# sourceMappingURL=jsonSevice.js.map

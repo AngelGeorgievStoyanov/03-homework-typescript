@@ -28,7 +28,7 @@ let arr;
 function start() {
     return __awaiter(this, void 0, void 0, function* () {
         const idBooki = yield getAllFavorites();
-        if (idBooki.length > 1) {
+        if (idBooki.length > 0) {
             btnMyFav.style.display = 'block';
         }
     });

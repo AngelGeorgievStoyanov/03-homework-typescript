@@ -9,7 +9,6 @@ const urlBook = 'https://www.googleapis.com/books/v1/volumes/';
 
 
 
-
 export async function getAllBoks(query: string) {
     const currentUrl = URL_API_BOOKS + query + max;
 

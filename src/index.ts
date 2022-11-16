@@ -25,15 +25,13 @@ async function start() {
 
     const idBooki = await getAllFavorites();
 
-    if (idBooki.length > 1) {
+    if (idBooki.length > 0) {
         btnMyFav.style.display = 'block';
 
     }
 }
 
-start()
-
-
+start();
 
 
 
@@ -56,13 +54,13 @@ async function init(data: string, e: Event) {
 
 
 async function myFavorites (e:Event) {
-    e.preventDefault()
-    allMyFavorites(e)
+    e.preventDefault();
+    allMyFavorites(e);
 }
 
 
 async function checkEventTarget(e: Event) {
-    e.preventDefault()
+    e.preventDefault();
 
-    targetButton(e,arr)
+    targetButton(e,arr);
 }
